@@ -17,14 +17,14 @@ require_once ("persona_controller.php");
  * Controlador para manipular los Lugares
  * @package Administrador
  */
-class Consulta extends Secure_area {
+class Defuncion extends Secure_area {
 
     /**
      * Constructor de la clase
      * @access public
      */
     function __construct() {
-        parent::__construct('consulta');
+        parent::__construct('defuncion');
     }
 
     /**
@@ -33,15 +33,15 @@ class Consulta extends Secure_area {
      * @param int $id Identificador de la Categoria
      */
     public function index($id = -1) {
-        
+
         $data['controller_name'] = strtolower($this->uri->segment(1));
-        $data['admin_table'] = get_consulta_admin_table();
+        $data['admin_table'] = get_defuncion_admin_table();
         $data['form_width'] = $this->get_form_width();
         $data['form_height'] = $this->get_form_height();
         $data['id_item'] = $id;
 //        var_dump($data);
 //        die($data);
-        $this->load->view('consulta/manage', $data);
+        $this->load->view('defuncion/manage', $data);
     }
 
     /**
@@ -50,7 +50,7 @@ class Consulta extends Secure_area {
      * @access public
      * @return string JSON con los datos de los lugares
      */
-    function mis_datos($id_paciente=null) {
+    function mis_datos($id_paciente = null) {
         $aColumns = array(
             'id' => array('checked' => true, 'es_mas' => true),
             'enfermedad' => array('limit' => 13),
@@ -70,8 +70,8 @@ class Consulta extends Secure_area {
                 'language' => "_muestra",
                 'height' => 200,
                 'class' => 'boton_admin'));
-        $cllWhere = isset($id_paciente)?'and persona.persona_id = ' . $id_paciente: null;
-        echo getData('consulta_model', $aColumns, $cllAccion, $cllWhere);
+        $cllWhere = isset($id_paciente) ? 'and persona.persona_id = ' . $id_paciente : null;
+        echo getData('defuncion_model', $aColumns, $cllAccion, $cllWhere);
     }
 
     /**
@@ -82,18 +82,28 @@ class Consulta extends Secure_area {
      */
     function view($id = -1, $paciente_id = -1) {
         $id = $this->input->get('id');
-        $data['info'] = $this->consulta_model->get_info($id);
+        $data['info'] = $this->defuncion_model->get_info($id);
         $doctores = $this->doctor_model->get_all();
         $data['doctor'] = -1;
-        foreach($doctores->result_array() as $doctor)
-        {
+        foreach ($doctores->result_array() as $doctor) {
             $data['doctores'][$doctor['id']] = $doctor['nombre'];
-            if($doctor['id']==$data['info']->doctor_id)
-                $data['doctor']=$doctor['id'];
+            if ($doctor['id'] == $data['info']->doctor_id)
+                $data['doctor'] = $doctor['id'];
         }
-//        $data['paciente_id'] = $this->input->get('paciente_id');
+        //Accidentes
+        $accidentes = $this->accidente_model->get_all();
+        foreach ($accidentes->result_array() as $accidente) {
+            $data['accidentes'][$accidente['id']] = $accidente['nombre'];
+        }
+
+        $accidentes_inter = $this->accidente_model->get_all_inter($id);
+        $data['accidente_db'] = array();
+        foreach ($accidentes_inter->result_array() as $accidente_inter) {
+            $data['accidente_db'][$accidente_inter['id']] = $accidente_inter['nombre'];
+        }
+
         $data['paciente_id'] = $paciente_id;
-        $this->load->view("consulta/form", $data);
+        $this->load->view("defuncion/form", $data);
     }
 
     /**
@@ -105,21 +115,22 @@ class Consulta extends Secure_area {
     function save($id = -1) {
         $data = array(
             'motivo' => $this->input->post('motivo'),
-            'enfermedad' => $this->input->post('enfermedad'),
-            'presion_arterial' => $this->input->post('presion_arterial'),
-            'frecuencia_cardiaca' => $this->input->post('frecuencia_cardiaca'),
-            'temperatura' => $this->input->post('temperatura'),
-            'frecuencia_respiratoria' => $this->input->post('frecuencia_respiratoria'),
-            'receta' => $this->input->post('receta'),
+            'observaciones' => $this->input->post('enfermedad'),
+            'aliento_etilico' => 1,
+            'valor_alcochek' => $this->input->post('presion_arterial'),
+            'factores_agravantes' => $this->input->post('frecuencia_cardiaca'),
             'doctor_id' => $this->input->post('doctor'),
-            'embarazada' => 0,
             'fecha_actualizacion' => date('Y-m-d h:i:s')
         );
         if ($this->input->post('paciente_id') != -1 && $this->input->post('paciente_id'))
             $data['paciente_id'] = $this->input->post('paciente_id');
+        $data_inter=array(
+            'paciente_id'=>$this->input->post('paciente_id'),
+            'accidente_id'=>$this->input->post('accidente')
+            );
         $this->db->trans_start();
         try {
-            if ($this->consulta_model->save($data, $id)) {
+            if ($this->defuncion_model->save($data, $id)) {
                 //Nuevo lug Insert
                 if ($id == -1) {
                     echo json_encode(array('success' => true, 'message' => 'Doctor ' .
@@ -176,7 +187,7 @@ class Consulta extends Secure_area {
      */
     function get_row() {
         $id = $this->input->post('row_id');
-        $data_row = get_consulta_data_row($this->consulta_model->get_info($id), $this);
+        $data_row = get_defuncion_data_row($this->defuncion_model->get_info($id), $this);
         echo $data_row;
     }
 

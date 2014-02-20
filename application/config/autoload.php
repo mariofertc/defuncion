@@ -109,7 +109,7 @@ $autoload['language'] = array('categorias', 'lugares', 'comun', 'form_validation
 |
 */
 
-$autoload['model'] = array('centro_salud_model', 'Persona', 'doctor_model','Empleado', 'Modulo', 'paciente_model', 'consulta_model');
+$autoload['model'] = array('centro_salud_model', 'Persona', 'doctor_model','Empleado', 'Modulo', 'paciente_model', 'consulta_model', 'defuncion_model', 'accidente_model');
 
 
 /* End of file autoload.php */

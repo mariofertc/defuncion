@@ -9,28 +9,27 @@
  */
 
 /**
- * Clase de Empleado
+ * Clase de Consulta
  * 
  * Modelo para acceder a los Usuarios.
  * @package Modelo
  */
-class Paciente_model extends Persona {
+class Defuncion_model extends CI_Model {
 
     /**
      * Verifica si esta almacenado el item especificado.
      * @param int $persona_id
      * @return boolean
      */
-    function exists($persona_id) {
-        $this->db->from('paciente');
-        $this->db->join('persona', 'persona.persona_id = paciente.persona_id');
-        $this->db->where('paciente.persona_id', $persona_id);
+    function exists($item_id) {
+        $this->db->from('defuncion');
+        $this->db->where('id', $item_id);
         $this->db->where('deleted', 0);
         $query = $this->db->get();
 
         return ($query->num_rows() == 1);
     }
-
+    
     /**
      * Devuelve los items que coincidan con los parametros dados
      * @param int $num
@@ -39,13 +38,15 @@ class Paciente_model extends Persona {
      * @param string $order
      * @return type
      */
-    function get_all($num = 0, $offset = 0, $where = null, $order = '') {
-        $this->db->select('persona.*, persona.persona_id as paciente_id FROM paciente, persona where persona.persona_id = paciente.persona_id and paciente.deleted = 0 ' .
+    function get_all($num = 0, $offset = 0, $where = null, $order = null) {
+//        $this->db->select('consulta.*, paciente.persona_id as paciente_id, doctor.id as doctor_id FROM paciente, persona,doctor,consulta where persona.persona_id = paciente.persona_id and paciente.persona_id = consulta.paciente_id and consulta.deleted = 0 ' .
+        $this->db->select('defuncion.*, paciente.persona_id as paciente_id FROM paciente, persona,defuncion where persona.persona_id = paciente.persona_id and paciente.persona_id = defuncion.paciente_id and defuncion.deleted = 0 ' .
                 $where);
         $this->db->order_by($order);
         $this->db->limit($offset + $num, $offset);
-
-        return $this->db->get();
+        $db = $this->db->get();
+//        echo $this->db->last_query();
+        return $db;
     }
 
     /**
@@ -54,7 +55,8 @@ class Paciente_model extends Persona {
      */
     function get_total() {
         $this->db->select("count(*) as total");
-        $this->db->from("paciente");
+        $this->db->from("defuncion");
+        $this->db->join('paciente', 'paciente.persona_id = defuncion.paciente_id');
         $this->db->join('persona', 'persona.persona_id=paciente.persona_id');
         $this->db->where('paciente.deleted', 0);
         $query = $this->db->get();
@@ -66,28 +68,26 @@ class Paciente_model extends Persona {
      * @param string $id
      * @return \stdClass
      */
-    function get_info($empleado_id) {
-        $this->db->from('paciente');
+    function get_info($consulta_id) {
+        $this->db->from('defuncion');
+        $this->db->join('paciente', 'paciente.persona_id = defuncion.paciente_id');
         $this->db->join('persona', 'persona.persona_id = paciente.persona_id');
-        $this->db->where('paciente.persona_id', $empleado_id);
-        $this->db->where('deleted', 0);
+        $this->db->where('defuncion.id', $consulta_id);
+        $this->db->where('defuncion.deleted', 0);
         $query = $this->db->get();
 
         if ($query->num_rows() == 1) {
             return $query->row();
         } else {
-            //Get empty base parent object, as $employee_id is NOT an employee
-            $persona_obj = parent::get_info(-1);
+            //create object with empty properties.
+            $fields = $this->db->list_fields('defuncion');
+            $consulta_obj = new stdClass;
 
-            //Get all the fields from employee table
-            $fields = $this->db->list_fields('paciente');
-
-            //append those fields to base parent object, we we have a complete empty object
             foreach ($fields as $field) {
-                $persona_obj->$field = '';
+                $consulta_obj->$field = '';
             }
 
-            return $persona_obj;
+            return $consulta_obj;
         }
     }
 
@@ -104,48 +104,21 @@ class Paciente_model extends Persona {
         $this->db->order_by("apellido", "asc");
         return $this->db->get();
     }
-
-    /**
-     * Inserta o guarda un item
-     * @param type $persona_data
-     * @param type $empleado_data
-     * @param type $permiso_data
-     * @param type $empleado_id
-     * @return type
-     */
-    function save(&$persona_data, &$empleado_data, &$permiso_data, $empleado_id = false) {
+    
+    function save(&$data, $consulta_id = false) {
         $success = false;
 
         //Run these queries as a transaction, we want to make sure we do all or nothing
         $this->db->trans_start();
         try {
-            if (parent::save($persona_data, $empleado_id)) {
-                if (!$empleado_id or !$this->exists($empleado_id)) {
-                    $empleado_data['persona_id'] = $empleado_id = $persona_data['persona_id'];
-                    $success = $this->db->insert('paciente', $empleado_data);
+            
+                if (!$consulta_id or !$this->exists($consulta_id)) {
+                    $success = $this->db->insert('defuncion', $data);
+                    $data['id'] = $this->db->insert_id();
                 } else {
-                    $this->db->where('persona_id', $empleado_id);
-                    $success = $this->db->update('paciente', $empleado_data);
+                    $this->db->where('id', $consulta_id);
+                    $success = $this->db->update('defuncion', $data);
                 }
-
-                //We have either inserted or updated a new employee, now lets set permissions. 
-                if ($success) {
-                    //First lets clear out any permissions the employee currently has.
-                    $success = $this->db->delete('permiso', array('persona_id' => $empleado_id));
-
-                    //Now insert the new permissions
-                    if ($success) {
-                        if ($permiso_data <> null) {
-                            foreach ($permiso_data as $allowed_module) {
-                                $success = $this->db->insert('permiso', array(
-                                    'modulo_id' => $allowed_module,
-                                    'persona_id' => $empleado_id));
-                            }
-                        }
-                    }
-                }
-            }
-
             $this->db->trans_complete();
             if ($this->db->trans_status() === FALSE) {
                 $this->db->trans_rollback();

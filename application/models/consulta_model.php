@@ -31,18 +31,6 @@ class Consulta_model extends CI_Model {
     }
 
     /**
-     * Devuelve todos los items almacenados.
-     * @return type
-     */
-    function getall() {
-        $this->db->from('consulta');
-        $this->db->where('deleted', 0);
-        $this->db->join('persona', 'persona.persona_id=paciente.persona_id');
-        $this->db->order_by("apellido", "asc");
-        return $this->db->get();
-    }
-
-    /**
      * Devuelve los items que coincidan con los parametros dados
      * @param int $num
      * @param int $offset
@@ -67,7 +55,8 @@ class Consulta_model extends CI_Model {
      */
     function get_total() {
         $this->db->select("count(*) as total");
-        $this->db->from("paciente");
+        $this->db->from("consulta");
+        $this->db->join('paciente', 'paciente.persona_id = consulta.paciente_id');
         $this->db->join('persona', 'persona.persona_id=paciente.persona_id');
         $this->db->where('paciente.deleted', 0);
         $query = $this->db->get();
@@ -289,69 +278,6 @@ class Consulta_model extends CI_Model {
 
         return $this->db->get();
     }
-
-    /**
-     * Chequea el logeo de Usuario.
-     * @param string $username
-     * @param string $password
-     * @return boolean
-     */
-    function login($username, $password) {
-        $query = $this->db->get_where('paciente', array('usuario' => $username, 'clave' => md5($password), 'deleted' => 0), 1);
-        if ($query->num_rows() == 1) {
-            $row = $query->row();
-            $this->session->set_userdata('persona_id', $row->persona_id);
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * Cierra la sesion del Usuario.
-     */
-    function logout() {
-        $this->session->sess_destroy();
-        redirect('home');
-    }
-
-    /**
-     * Verifica si existe un usuario Logeado.
-     * @return boolearn
-     */
-    function is_logged_in() {
-        return $this->session->userdata('persona_id') != false;
-    }
-
-    /**
-     * Obtiene la Informacion del Usuario Logeado.
-     */
-    function get_logged_in_empleado_info() {
-        if ($this->is_logged_in()) {
-            return $this->get_info($this->session->userdata('persona_id'));
-        }
-
-        return false;
-    }
-
-    /**
-     * Determina si el usuario tiene acceso al modulo indicado.
-     * @param int $modulo_id
-     * @param int $persona_id
-     * @return boolean
-     */
-    function has_permission($modulo_id, $persona_id) {
-        //if no modulo_id is null, allow access
-        if ($modulo_id == null) {
-            return true;
-        }
-
-        $query = $this->db->get_where('permiso', array('persona_id' => $persona_id, 'modulo_id' => $modulo_id), 1);
-        return $query->num_rows() == 1;
-
-
-        return false;
-    }
-
 }
 
 /* End of file empleado.php */

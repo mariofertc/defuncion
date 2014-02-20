@@ -55,17 +55,6 @@ class Doctor_model extends Persona {
     }
 
     /**
-     * Devuelve todos los items almacenados.
-     * @return type
-     */
-    function getall() {
-        $this->db->from('doctor');
-        $this->db->where('deleted', 0);
-        $query = $this->db->get();
-        return $query;
-    }
-
-    /**
      * Devuelve los items que coincidan con los parametros dados
      * @param int $num
      * @param int $offset

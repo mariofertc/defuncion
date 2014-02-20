@@ -90,6 +90,14 @@ class Paciente extends Persona_controller {
                 'width' => $this->get_form_width(),
                 'height' => $this->get_form_height(),
                 'class' => 'boton_admin'),
+            '2' => array(
+//                'function' => "../consulta",
+                'function' => "defuncion",
+                'comun_language' => "comun_edit",
+                'language' => "_update",
+                'width' => $this->get_form_width(),
+                'height' => $this->get_form_height(),
+                'class' => 'boton_admin')
             );
         echo getData('paciente_model', $aColumns, $cllAccion);
     }
@@ -100,6 +108,13 @@ class Paciente extends Persona_controller {
         $id_paciente = $this->input->get('id', TRUE);
 //        die($id_paciente);
         redirect("consulta/index/$id_paciente");
+    }
+    function defuncion()
+    {
+//        redirect("consulta", "index?id=$id_paciente");
+        $id_paciente = $this->input->get('id', TRUE);
+//        die($id_paciente);
+        redirect("defuncion/index/$id_paciente");
     }
 
     /**

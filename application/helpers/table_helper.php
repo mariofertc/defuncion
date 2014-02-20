@@ -133,6 +133,50 @@ function get_consulta_data_row($data,$controller)
 	
 	return $table_data_row;
 }
+/*
+Gets the html table to manage categorys.
+*/
+function get_defuncion_admin_table()
+{
+	$table='<table cellpadding="0" cellspacing="0" border="0" class="display" id="sortable_table">
+		<thead>
+			<tr>
+				<th width="3%"><input type="checkbox" id="select_all" /></th>
+				<th width="20%">Motivo</th>
+				<th width="20%">Observaciones</th>
+				<th width="30%">Fecha Consulta</th>
+				<th width="20%">Acciones</th>
+			</tr>
+		</thead>
+		<tbody>
+	<!--Esto se llena con  ajax cloro -->	
+		</tbody>
+		<tfoot>
+			
+		</tfoot>
+	</table>';
+	return $table;
+}
+
+
+function get_defuncion_data_row($data,$controller)
+{	
+	$CI =& get_instance();
+	$controller_name=$CI->uri->segment(1);
+	$width = $controller->get_form_width();
+	$height = $controller->get_form_height();
+
+	$table_data_row='<tr>';
+	$table_data_row.="<td width='5%'><input type='checkbox' id='data_$data->id' value='".$data->id."'/></td>";
+	$table_data_row.='<td width="20%">'.character_limiter($data->motivo,30).'</td>';
+	$table_data_row.='<td width="40%">'.character_limiter($data->observaciones,30).'</td>';
+	$table_data_row.='<td width="40%">'.character_limiter($data->fecha_actualizacion,30).'</td>';
+	$table_data_row.='<td width="5%">'.anchor($controller_name."/view?id=$data->id&width=".$width."&height=".$height, $CI->lang->line('comun_edit'),array('class'=>'thickbox','title'=>$CI->lang->line($controller_name.'_update'))).'  ';		
+	$table_data_row.=anchor($controller_name."/fotos/$data->id?width=".$width."&height".$height, $CI->lang->line('fotos_foto'),array('class'=>'boton_admin', 'title'=>$CI->lang->line($controller_name.'_muestra'))).'</td>';		
+	$table_data_row.='</tr>';
+	
+	return $table_data_row;
+}
 
 /*
 Gets the html table to manage categorys.
