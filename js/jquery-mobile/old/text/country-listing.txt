@@ -1,0 +1,21 @@
+<ul data-role="listview">
+        <li>Asia</li>
+                <li><a href="#china">China</a></li>
+                <li><a href="#japan">Japan</a></li>												     					
+                        <li><a href="#korea">Korea</a></li>    
+                        <li><a href="#nzld">New Zealand</a></li>
+        <li>Europe</li>
+                        <li><a href="#austria">Austria</a></li>
+                        <li><a href="#czech">Czech Republic</a></li>
+                        <li><a href="#france">France</a></li>                    
+        <li>Micronesia</li>	
+                        <li><a href="#palau">Palau</a></li>
+                        <li><a href="#yap">Yap</a></li>
+        <li>Mexico</li>
+                        <li><a href="#cozumel">Cozumel</a></li>
+                        <li><a href="#acapulco">Acapulco</a></li>
+        <li>Pacific</li>
+                        <li><a href="#oz">Australia</a></li>	   								     		<li><a href="#fiji">Fiji</a></li>    
+                        <li><a href="#tahiti">Tahiti</a></li>
+                        <li><a href="#nzld">New Zealand</a></li>
+</ul>

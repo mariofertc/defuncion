@@ -1,0 +1,397 @@
+-- MySQL dump 10.13  Distrib 5.1.51, for Win64 (unknown)
+--
+-- Host: localhost    Database: rutamobil
+-- ------------------------------------------------------
+-- Server version	5.1.51-community
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `calificacion`
+--
+
+DROP TABLE IF EXISTS `calificacion`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `calificacion` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `calificacion` int(11) DEFAULT '0',
+  `fecha` varchar(45) DEFAULT NULL,
+  `lugar_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`,`lugar_id`),
+  KEY `fk_calificacion_lugar1` (`lugar_id`),
+  CONSTRAINT `fk_calificacion_lugar1` FOREIGN KEY (`lugar_id`) REFERENCES `lugar` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `calificacion`
+--
+
+LOCK TABLES `calificacion` WRITE;
+/*!40000 ALTER TABLE `calificacion` DISABLE KEYS */;
+INSERT INTO `calificacion` VALUES (1,4,NULL,2);
+/*!40000 ALTER TABLE `calificacion` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `categoria`
+--
+
+DROP TABLE IF EXISTS `categoria`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `categoria` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(45) DEFAULT NULL,
+  `descripcion` varchar(255) DEFAULT NULL,
+  `ciudad_id` int(11) NOT NULL,
+  `nombre_enlace` varchar(45) DEFAULT NULL,
+  `icon` varchar(4) DEFAULT NULL,
+  `deleted` int(1) DEFAULT '0',
+  PRIMARY KEY (`id`,`ciudad_id`),
+  KEY `fk_categoria_ciudad1` (`ciudad_id`),
+  CONSTRAINT `fk_categoria_ciudad1` FOREIGN KEY (`ciudad_id`) REFERENCES `ciudad` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `categoria`
+--
+
+LOCK TABLES `categoria` WRITE;
+/*!40000 ALTER TABLE `categoria` DISABLE KEYS */;
+INSERT INTO `categoria` VALUES (1,'Iglesias','Iglesia de la Vírgen de Agua Santa.',1,'iglesias','B',0),(2,'Atractivos Turísticos','Zoológico, Serpentario, Volcán, etc.',1,'atractivos','C',0),(3,'Zoológico','Visita el Serpentario, Zoológico, etc.',1,'zoologico','C',0),(4,'Deportes','Downhill, rapting, cañoning, etc.',1,'deportes','C',0),(5,'Balneareos','Termas de la virgen,tambo,etc.',1,'balneareos','C',0),(6,'Cascadas','Bascum, Manto de la novia, Pailon, etc.',1,'cascadas','C',0),(7,'Miradores','Ojos del volcan, cruz de bellavista, etc.',1,'miradores','C',0),(8,'Artesanías','Talleres, Paseo artesanal, etc.',1,'artesanias','C',0),(9,'xxxc','xxxd',1,'xxxe',NULL,1),(10,'x','xx',1,'xxx',NULL,1),(11,'x','xx',1,'xxx',NULL,1),(12,'ccc','cccc',1,'ccccc',NULL,1),(13,'xx','xxx',1,'xxxx',NULL,1),(14,'xx','xxx',1,'xxxx',NULL,1),(15,'x','xx',1,'xxxx',NULL,1),(16,'x','x',1,'x',NULL,1);
+/*!40000 ALTER TABLE `categoria` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ciudad`
+--
+
+DROP TABLE IF EXISTS `ciudad`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ciudad` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(45) DEFAULT NULL,
+  `descripcion` varchar(255) DEFAULT NULL,
+  `provincia_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_ciudad_provincia1` (`provincia_id`),
+  CONSTRAINT `fk_ciudad_provincia1` FOREIGN KEY (`provincia_id`) REFERENCES `provincia` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ciudad`
+--
+
+LOCK TABLES `ciudad` WRITE;
+/*!40000 ALTER TABLE `ciudad` DISABLE KEYS */;
+INSERT INTO `ciudad` VALUES (1,'Baños',NULL,1);
+/*!40000 ALTER TABLE `ciudad` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `empleado`
+--
+
+DROP TABLE IF EXISTS `empleado`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `empleado` (
+  `usuario` varchar(255) NOT NULL,
+  `clave` varchar(255) NOT NULL,
+  `persona_id` int(10) NOT NULL,
+  `deleted` int(1) NOT NULL DEFAULT '0',
+  UNIQUE KEY `usuario` (`usuario`),
+  KEY `persona_id` (`persona_id`),
+  CONSTRAINT `persona_empleado` FOREIGN KEY (`persona_id`) REFERENCES `persona` (`persona_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `empleado`
+--
+
+LOCK TABLES `empleado` WRITE;
+/*!40000 ALTER TABLE `empleado` DISABLE KEYS */;
+INSERT INTO `empleado` VALUES ('csanchez','25d55ad283aa400af464c76d713c07ad',3,1),('gsaltos','25d55ad283aa400af464c76d713c07ad',6,1),('mariofertc','cebdd715d4ecaafee8f147c2e85e0754',2,0),('pbustamante','25d55ad283aa400af464c76d713c07ad',4,1),('pinca','25d55ad283aa400af464c76d713c07ad',5,0);
+/*!40000 ALTER TABLE `empleado` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `fotos`
+--
+
+DROP TABLE IF EXISTS `fotos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `fotos` (
+  `id` int(11) NOT NULL,
+  `descripcion` varchar(255) DEFAULT NULL,
+  `imagen_path` varchar(45) DEFAULT NULL,
+  `id_lugar` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_lugar_fotos` (`id_lugar`),
+  CONSTRAINT `fk_lugar_fotos` FOREIGN KEY (`id_lugar`) REFERENCES `lugar` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `fotos`
+--
+
+LOCK TABLES `fotos` WRITE;
+/*!40000 ALTER TABLE `fotos` DISABLE KEYS */;
+INSERT INTO `fotos` VALUES (1,'zoo','zoo_01.jpg',3),(2,'img','001.jpg',2);
+/*!40000 ALTER TABLE `fotos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `log_evento`
+--
+
+DROP TABLE IF EXISTS `log_evento`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `log_evento` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(45) DEFAULT NULL,
+  `modulo` varchar(45) DEFAULT NULL,
+  `stack_trace` varchar(45) DEFAULT NULL,
+  `fecha` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `log_evento`
+--
+
+LOCK TABLES `log_evento` WRITE;
+/*!40000 ALTER TABLE `log_evento` DISABLE KEYS */;
+/*!40000 ALTER TABLE `log_evento` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `lugar`
+--
+
+DROP TABLE IF EXISTS `lugar`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `lugar` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(256) NOT NULL,
+  `direccion` varchar(1024) DEFAULT NULL,
+  `coordenadas` varchar(256) NOT NULL,
+  `imagen_path` varchar(256) DEFAULT NULL,
+  `descripcion` varchar(1024) NOT NULL,
+  `fecha_actualizacion` datetime NOT NULL,
+  `categoria_id` int(11) NOT NULL,
+  `interes` varchar(1024) DEFAULT NULL,
+  `nombre_enlace` varchar(100) DEFAULT NULL,
+  `sector` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_lugar_categoria` (`categoria_id`),
+  CONSTRAINT `fk_lugar_categoria` FOREIGN KEY (`categoria_id`) REFERENCES `categoria` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `lugar`
+--
+
+LOCK TABLES `lugar` WRITE;
+/*!40000 ALTER TABLE `lugar` DISABLE KEYS */;
+INSERT INTO `lugar` VALUES (2,'Iglesia de la Virgen de Agua Santa','This place is located 7 kilometers north of Jepara city center. The way to get there is very easy. Just follow the traffic sign and you will find it. From the town square, follow the road to Bangsri then turn left when reached kuwasen village. You can tak','{\'latitud\':200,\'longitud\':100}','iglesia-la sagrada concepcion.jpg','Construida con piedra volcánica.','0000-00-00 00:00:00',1,'Su cabecera es la ciudad de Baños; cuenta con una parroquia urbana que es Baños (La Matriz).','iglesia','Centro de la Ciudad'),(3,'Zoológico','Entrada a Baños','{\"latitud\":-1.398773,\"longitud\":-78.414838}','uno.jpg','Es un zoológico','0000-00-00 00:00:00',2,'Su cabecera es la ciudad de Baños; cuenta con una parroquia urbana que es Baños (La Matriz).','zoo','San Francisco'),(4,'Volcán Tungurahua','Baños, una pequeña ciudad que se encuentra asentada en sobre una meseta basáltica, está rodeado de altas montañas en los andes ecuatorianos, tiene una extensión de 340 hectáreas; conocido en el mundo entero por sus bondades naturales, sus ríos, sus cascadas su flora y fauna, las aguas medicinales que brotan del fondo de la tierra, por el volcán Tungurahua.','{\'latitud\':200,\'longitud\':100}','dos.jpg','Es un cantón perteneciente a la Provincia de Tungurahua, se encuentra ubicada en la base del volcán Tungurahua, en el flanco oriental de la Cordillera de los Andes, sobre una meseta montañosa drenada por los ríos Bascún, Ulba y Pastaza que inciden directamente en la geografía de Baños. Su significativa diferencia de altitud, que va desde los 5016 m.s.n.m en la cima del volcán Tungurahua, pasando por los 1820 m.s.n.m a los que se encuentra la ciudad de Baños, hasta los 1050 m.s.n.m en el límite provincial con Pastaza, generan especiales condiciones climáticas en su camino hacia el oriente, lo que hace del cantón Baños uno de los sitios más privilegiados para la existencia de flora, fauna y paisajes únicos en el mundo. ','0000-00-00 00:00:00',2,'Su cabecera es la ciudad de Baños; cuenta con una parroquia urbana que es Baños (La Matriz).','volcan','Ulba'),(5,'Serpentario','Baños, una pequeña ciudad que se encuentra asentada en sobre una meseta basáltica, está rodeado de altas montañas en los andes ecuatorianos, tiene una extensión de 340 hectáreas; conocido en el mundo entero por sus bondades naturales, sus ríos, sus cascadas su flora y fauna, las aguas medicinales que brotan del fondo de la tierra, por el volcán Tungurahua.','{\'latitud\':200,\'longitud\':100}','tres.jpg','Es un cantón perteneciente a la Provincia de Tungurahua, se encuentra ubicada en la base del volcán Tungurahua, en el flanco oriental de la Cordillera de los Andes, sobre una meseta montañosa drenada por los ríos Bascún, Ulba y Pastaza que inciden directamente en la geografía de Baños. Su significativa diferencia de altitud, que va desde los 5016 m.s.n.m en la cima del volcán Tungurahua, pasando por los 1820 m.s.n.m a los que se encuentra la ciudad de Baños, hasta los 1050 m.s.n.m en el límite provincial con Pastaza, generan especiales condiciones climáticas en su camino hacia el oriente, lo que hace del cantón Baños uno de los sitios más privilegiados para la existencia de flora, fauna y paisajes únicos en el mundo. ','0000-00-00 00:00:00',2,'Su cabecera es la ciudad de Baños; cuenta con una parroquia urbana que es Baños (La Matriz).','lugares','Ulba'),(6,'Flora y Fauna','Baños, una pequeña ciudad que se encuentra asentada en sobre una meseta basáltica, está rodeado de altas montañas en los andes ecuatorianos, tiene una extensión de 340 hectáreas; conocido en el mundo entero por sus bondades naturales, sus ríos, sus cascadas su flora y fauna, las aguas medicinales que brotan del fondo de la tierra, por el volcán Tungurahua.','{\'latitud\':200,\'longitud\':100}','cuatro.jpg','Es un cantón perteneciente a la Provincia de Tungurahua, se encuentra ubicada en la base del volcán Tungurahua, en el flanco oriental de la Cordillera de los Andes, sobre una meseta montañosa drenada por los ríos Bascún, Ulba y Pastaza que inciden directamente en la geografía de Baños. Su significativa diferencia de altitud, que va desde los 5016 m.s.n.m en la cima del volcán Tungurahua, pasando por los 1820 m.s.n.m a los que se encuentra la ciudad de Baños, hasta los 1050 m.s.n.m en el límite provincial con Pastaza, generan especiales condiciones climáticas en su camino hacia el oriente, lo que hace del cantón Baños uno de los sitios más privilegiados para la existencia de flora, fauna y paisajes únicos en el mundo. ','0000-00-00 00:00:00',2,'Su cabecera es la ciudad de Baños; cuenta con una parroquia urbana que es Baños (La Matriz).','external','Ulba');
+/*!40000 ALTER TABLE `lugar` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `modulo`
+--
+
+DROP TABLE IF EXISTS `modulo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `modulo` (
+  `nombre_leng_key` varchar(255) NOT NULL,
+  `desc_leng_key` varchar(255) NOT NULL,
+  `orden` int(10) NOT NULL,
+  `modulo_id` varchar(255) NOT NULL,
+  PRIMARY KEY (`modulo_id`),
+  UNIQUE KEY `desc_leng_key` (`desc_leng_key`),
+  UNIQUE KEY `nombre_leng_key` (`nombre_leng_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `modulo`
+--
+
+LOCK TABLES `modulo` WRITE;
+/*!40000 ALTER TABLE `modulo` DISABLE KEYS */;
+INSERT INTO `modulo` VALUES ('modulo_categorias','modulo_categorias_desc',0,'categorias'),('modulo_empleados','modulo_empleados_desc',2,'empleados'),('modulo_lugares','modulo_lugares_desc',1,'lugares');
+/*!40000 ALTER TABLE `modulo` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `permiso`
+--
+
+DROP TABLE IF EXISTS `permiso`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `permiso` (
+  `modulo_id` varchar(255) NOT NULL,
+  `persona_id` int(10) NOT NULL,
+  PRIMARY KEY (`modulo_id`,`persona_id`),
+  KEY `person_id` (`persona_id`),
+  CONSTRAINT `modulo_permiso` FOREIGN KEY (`modulo_id`) REFERENCES `modulo` (`modulo_id`),
+  CONSTRAINT `persona_permiso` FOREIGN KEY (`persona_id`) REFERENCES `empleado` (`persona_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `permiso`
+--
+
+LOCK TABLES `permiso` WRITE;
+/*!40000 ALTER TABLE `permiso` DISABLE KEYS */;
+INSERT INTO `permiso` VALUES ('categorias',2),('empleados',2),('lugares',2);
+/*!40000 ALTER TABLE `permiso` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `persona`
+--
+
+DROP TABLE IF EXISTS `persona`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `persona` (
+  `nombre` varchar(255) NOT NULL,
+  `apellido` varchar(255) NOT NULL,
+  `telefono` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `direccion` varchar(255) NOT NULL,
+  `ciudad` varchar(255) NOT NULL,
+  `pais` varchar(255) NOT NULL,
+  `comentarios` text NOT NULL,
+  `persona_id` int(10) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`persona_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `persona`
+--
+
+LOCK TABLES `persona` WRITE;
+/*!40000 ALTER TABLE `persona` DISABLE KEYS */;
+INSERT INTO `persona` VALUES ('Mario','Torres','245979','mariofertc@mixmail.com','Urb. Los Chasquis','Ambato','Ecuador','Bastantes',2),('Carlos','Sanchez','','','','','','',3),('pilar','bustamante','','','','','','',4),('Paola','Inca','','fq@ty.co','','','','',5),('ginger','saltos','','','','','','',6);
+/*!40000 ALTER TABLE `persona` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `provincia`
+--
+
+DROP TABLE IF EXISTS `provincia`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `provincia` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(45) DEFAULT NULL,
+  `descripcion` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `provincia`
+--
+
+LOCK TABLES `provincia` WRITE;
+/*!40000 ALTER TABLE `provincia` DISABLE KEYS */;
+INSERT INTO `provincia` VALUES (1,'Tungurahua',NULL),(2,'asd',''),(3,'Pichincha','ProvinciaCerca'),(4,'afadsfadf','adfadfafaf'),(5,'dsafdsf','asdfadsaffa'),(6,'dsfadfasdf','asdfsdafadf'),(7,'asdfadfad','adsfadfadf'),(8,'Carchi','adfadfadfadfaf'),(9,'Loja','adfadfadsfa'),(10,'Esmeraldas','ProvinciaVerde'),(11,'El Oro','asdfasdfasdfd'),(12,'asdf  sdaf','asdfasdf'),(13,'adf da','asdf   dfdasd'),(14,'samantha','Anahi torres aldas');
+/*!40000 ALTER TABLE `provincia` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sessions`
+--
+
+DROP TABLE IF EXISTS `sessions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sessions` (
+  `session_id` varchar(40) NOT NULL DEFAULT '0',
+  `ip_address` varchar(16) NOT NULL DEFAULT '0',
+  `user_agent` varchar(250) NOT NULL,
+  `last_activity` int(10) unsigned NOT NULL DEFAULT '0',
+  `user_data` text,
+  PRIMARY KEY (`session_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sessions`
+--
+
+LOCK TABLES `sessions` WRITE;
+/*!40000 ALTER TABLE `sessions` DISABLE KEYS */;
+INSERT INTO `sessions` VALUES ('579236ac4b148eb51fd5ed0e8d6477c2','127.0.0.1','Mozilla/5.0 (Windows NT 6.1; WOW64; rv:17.0) Gecko/20100101 Firefox/17.0',1355113896,''),('6ac7dc1a4653800e3cace753488ef623','127.0.0.1','Mozilla/5.0 (Windows NT 6.1; WOW64; rv:17.0) Gecko/20100101 Firefox/17.0',1355077230,''),('710ff4e38dcd9be973cc75c672c17949','127.0.0.1','Mozilla/5.0 (Windows NT 6.1; WOW64; rv:17.0) Gecko/20100101 Firefox/17.0',1355069367,'a:2:{s:9:\"user_data\";s:0:\"\";s:10:\"persona_id\";s:1:\"2\";}');
+/*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `usuario`
+--
+
+DROP TABLE IF EXISTS `usuario`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `usuario` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `usuario` varchar(45) DEFAULT NULL,
+  `clave` varchar(45) DEFAULT NULL,
+  `nombre` varchar(45) DEFAULT NULL,
+  `apellido` varchar(45) DEFAULT NULL,
+  `direccion` varchar(245) DEFAULT NULL,
+  `email` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `usuario`
+--
+
+LOCK TABLES `usuario` WRITE;
+/*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
+/*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2012-12-09 23:46:27

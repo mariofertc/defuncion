@@ -1,0 +1,824 @@
+g718/*Fix android crashes page-transition*/
+.ui-page { -webkit-backface-visibility: hidden; } 
+
+@font-face {
+        font-family: 'bebas_neueregular';
+        src: url('bebasneue/bebasneue-webfont.eot');
+        src: url('bebasneue/bebasneue-webfont.eot?#iefix') format('embedded-opentype'),
+        url('bebasneue/bebasneue-webfont.woff') format('woff'),
+        url('bebasneue/bebasneue-webfont.ttf') format('truetype'),
+        url('bebasneue/bebasneue-webfont.svg#bebas_neueregular') format('svg');
+        font-weight: normal;
+        font-style: normal;
+
+}
+
+
+@font-face {
+        font-family: 'WebSymbolsRegular';
+        src: url('websymbols/websymbols-regular-webfont.eot');
+        src: url('websymbols/websymbols-regular-webfont.eot?#iefix') format('embedded-opentype'),
+        url('websymbols/websymbols-regular-webfont.woff') format('woff'),
+        url('websymbols/websymbols-regular-webfont.ttf') format('truetype'),
+        url('websymbols/websymbols-regular-webfont.svg#WebSymbolsRegular') format('svg');
+        font-weight: normal;
+        font-style: normal;
+        }
+
+@keyframes corazon {
+    to { transform: scale(.9); }
+}
+
+@-webkit-keyframes corazon {
+    to { -webkit-transform: scale(.9); }
+}
+
+@-moz-keyframes corazon {
+    to { -moz-transform: scale(.9); }
+}
+
+@-ms-keyframes corazon {
+    to { -ms-transform: scale(.9); }
+}
+
+@-o-keyframes corazon {
+    to { -o-transform: scale(.9); }
+}
+
+
+html{
+    font-size:16px;
+}
+
+.migas h4 a
+{
+    -moz-transition   : all 1s ease;
+    -ms-transition    : all 1s ease;
+    -o-transition     : all 1s ease;
+    -webkit-transition: all 1s ease;
+    color             : black !important;
+    font-weight       : normal;
+    text-decoration   : none;
+    text-transform    : uppercase;
+    transition        : all 1s ease;
+}
+.migas h4 a:hover
+{
+   color:orange !important;
+
+}
+
+/* custom icons */
+.ui-icon-phone-touch
+ {
+    background-image: url(../geo.png);
+    background-repeat: no-repeat;
+}
+
+
+#backToTop {
+
+    background-color: black;
+    color           : white;
+    font-family     : 'bebas_neueregular';
+    left            : 3%;
+    padding         : 10px;
+    position        : fixed;
+    text-decoration : none;
+    top             : 0;
+    font-weight: normal;
+}
+
+
+#cora {
+
+    color    : #000;
+    display  : inline-block;
+    font-size: 2.1875em;
+    animation               : corazon 1.2s infinite;
+    -webkit-animation       : corazon 1.2s infinite;
+    -moz-animation          : corazon 1.2s infinite;
+    -ms-animation           : corazon 1.2s infinite;
+    -o-animation            : corazon 1.2s infinite;
+            
+    transform-origin        : center;
+    -webkit-transform-origin: center;
+    -moz-transform-origin   : center;
+    -ms-transform-origin    : center;
+    -o-transform-origin     : center;
+
+}
+
+
+
+#itemCount {
+    background-color : white;
+    background-image : url("../images/comen.png");
+    background-repeat: no-repeat;
+    border           : medium none;
+    color            : black;
+    font-family      : arial;
+    font-size        : 12px;    
+    margin           : 0;
+    padding          : 4px 8px 5px 9px;    
+}
+
+
+.laciudad h2 .titu{
+
+margin:0px;
+padding:0px;
+
+}
+
+
+.dropshadow  {
+    border-left-width : 1px;
+    border-right-width: 1px;
+    border-top-width  : 1px;
+    min-width         :100%;
+    
+}
+.copyright {
+
+    font-family: 'bebas_neueregular';
+    font-size  : 0.875em;
+    font-weight: normal;
+    text-align : center;
+}
+img {
+    
+    border-left-width: 1px;
+    
+}
+
+
+.atrib img {
+    border-left-width: 1px;
+    width            : 90px;
+}
+.atrib2{
+
+    cursor:pointer;
+}
+
+.like{
+    background : url("../images/star.png") no-repeat scroll 0 0 transparent;
+    color      :black;
+    float      :left;
+    font-size  : 0.7em;
+    height     : 18px;
+    line-height: 1.5em;
+    padding-top: 5px;
+    text-align : center;
+    width      : 24px;
+}
+.comen2{
+    background : url("../images/comen.png") no-repeat scroll 0 0 transparent;
+    color      :black;
+    float      :left;
+    font-size  : 0.7em;
+    height     : 18px;
+    line-height: 1.5em;
+    padding-top: 5px;
+    text-align : center;
+    width      : 24px;
+}
+.voto_link ui-link{
+
+line-height: 1.5em;
+
+}
+
+.thumbnails {
+    margin-left: 80px;
+    margin-top : 40px;
+}
+.titulo li h1{
+    font-family: 'bebas_neueregular';
+    font-style : normal;
+    font-weight: normal;
+    margin-top: 0px;
+    
+}
+
+.titulo p{
+    
+    font-family  : 'Terminal Dosis', Arial, sans-serif;
+    font-size    :14px;
+    font-style   : normal;
+}
+
+.yellow{
+    background:#F4C619;
+
+}
+
+.conte li h1{
+    color          :black;
+    font-family    : 'bebas_neueregular';
+    font-style     : normal;
+    font-weight    : normal;
+    text-decoration: none;
+}
+
+/*.conte p{
+    font-family: 'Terminal Dosis', Arial, sans-serif;
+}*/
+
+.home h2{
+    font-family: 'bebas_neueregular';
+    font-weight: normal;
+    font-style : normal;
+    font-size  : 0.875em;
+}
+.laciudad{
+    padding:0px;
+}
+.laciudadd{
+    padding:0px;
+}
+
+.laciudadd p{
+    border        :0px;
+    font-family   : 'Terminal Dosis', Arial, sans-serif;
+    font-size     :1em;
+    font-style    : normal;
+    font-weight   : normal;
+    margin        :0px;
+    padding-bottom:5px;
+    text-align    :justify;
+    text-overflow : ellipsis;
+
+}	
+
+.laciudad p{
+    border        :0px;
+    font-family   : 'Terminal Dosis', Arial, sans-serif;
+    font-size     :1em;
+    font-style    : normal;
+    font-weight   : normal;
+    margin        :0px;
+    padding-bottom:5px;
+    text-align    :justify;
+    text-overflow : ellipsis;
+
+}
+
+
+.laciudadd H1{
+  
+    font-family     : 'bebas_neueregular',Helvetica;
+    font-weight     : normal;
+    margin          :0px;
+    text-align      :justify;
+}	
+.laciudad2 H1{
+    font-family: 'bebas_neueregular',Helvetica;
+    font-size  :1.6875em;
+    font-weight: normal;
+    text-align :justify;
+    margin: 0px;
+    padding: 0px;
+}
+
+.laciudad2 P{
+    font-family: 'Terminal Dosis', Arial, sans-serif;
+    font-size  :1em;
+    margin     :0px;
+    padding    :0 0 5px;
+    text-align :justify;
+    
+}
+.bannerr {
+    background-image : url(../images/banner.gif);
+    background-repeat: no-repeat;
+    height           :49px;    
+}
+
+
+
+.icon{
+    
+    -moz-transition   : all 300ms linear;
+    -ms-transition    : all 300ms linear;
+    -o-transition     : all 300ms linear;
+    -webkit-transition: all 300ms linear;
+    float             :left;
+    font-family       : 'WebSymbolsRegular', cursive;
+    font-size         :2.1875em;
+    text-align        : center;
+    text-shadow       : 0px 0px 1px #333;
+    transition        : all 300ms linear;
+    width             : 70px;
+}
+
+.icon:hover{
+    -moz-transition   : all 300ms linear;
+    -ms-transition    : all 300ms linear;
+    -o-transition     : all 300ms linear;
+    -webkit-transition: all 300ms linear;
+    float             :left;
+    font-family       : 'WebSymbolsRegular', cursive;
+    font-size         : 45px;
+    line-height       : 45px;
+    text-align        : center;
+    text-shadow       : 0px 0px 1px #333;
+    transition        : all 300ms linear;
+    width             : 70px;
+}
+
+.icon2{
+    -moz-transition   : all 300ms linear;
+    -ms-transition    : all 300ms linear;
+    -o-transition     : all 300ms linear;
+    -webkit-transition: all 300ms linear;
+    float             :left;
+    font-family       : 'WebSymbolsRegular', cursive;
+    font-size         :1.5625em;
+    line-height       : 35px;
+    text-align        : center;
+    text-shadow       : 0px 0px 1px #333;
+    transition        : all 300ms linear;
+    width             : 70px;
+}
+
+
+.icon3{
+    color       :black;
+    float       :left;   
+    font-family : 'WebSymbolsRegular', cursive;
+    font-size   :2.1875em;
+    padding-left:5px;
+    text-shadow : 0px 0px 1px #333;
+    width       : 50px;
+}
+a.ui-link.icon3 h1{
+    color:black;
+    list-style: none;
+}
+
+.items {
+    display    :iline-block;
+    list-style :none;
+    margin     :0px;
+    padding-top:3px;
+    padding    :0px;
+}
+
+.items h1{
+    font-size:1em;
+    padding-top:1px;
+}
+
+.items li {
+    background    :#EFEDED;
+    float         :left;
+    margin-bottom :3px;
+    margin-left   : 0.1%;
+    padding       : 3px 0;
+    width         : 19.9%; /*24,9*/
+}
+
+.desitems{
+
+    margin-top:5px;
+}
+
+
+.tw  {
+    background :url(images/stripes.png);
+    font-family: 'Terminal Dosis', Arial, sans-serif;
+    text-shadow:none;
+}
+.twtr-doc{
+/*    100%;*/
+
+}
+
+
+
+.tw h4 {
+    color         :#000;
+    font-family   : 'bebas_neueregular';
+    font-size     :0.875em;
+    font-style    : normal;
+    font-weight   : normal;
+    margin        :0px;
+    padding-bottom:10px;
+    text-shadow   :none;
+
+}
+
+.sociales{
+    background:#FFF;
+}
+
+.camera{
+    padding:0px;
+
+}
+
+
+/* PhotoSwipe styles */
+
+
+
+.gallery { list-style: none; padding: 0; margin: 0; }
+.gallery:after { clear: both; content: "."; display: block; height: 0; visibility: hidden; }
+.gallery li { float: left; width: 33.33333333%; }
+.gallery li a { background: #fff; display: block; /*margin: 5px;*/ box-shadow: 0px 2px 5px  rgba(0,0,0,0.6); padding: 3px;/*border-radius: 10px;*/ }
+.gallery li img { display: block; width: 100%; height: auto;/*border-radius: 10px;*/ }
+
+#PhotoSwipeTarget { width: 100%; height: 200px; }
+ 
+#Indicators { text-align: center; margin-top: 20px; }
+#Indicators span { display: inline-block; height: 10px; width: 10px; margin: 0 10px 0 0; padding: 0; -webkit-border-radius:5px; -moz-border-radius:5px; -o-border-radius:5px; border-radius:5px; background: #c5c5c5; overflow:hidden; }
+#Indicators span.current{ background: #EEBF02; }
+
+.header h4 {
+    font-family: 'bebas_neueregular', sans-serif;
+    font-family:14px;
+    font-weight: normal;
+
+}	
+
+.copyright h4 {
+    font-family: 'bebas_neueregular', sans-serif;
+    font-family:14px;
+    font-weight: normal;
+
+}	
+.icab li {
+    font-family: 'Terminal Dosis', Arial, sans-serif;
+    font-weight: normal;
+    top        :0px;
+}
+.content form{
+    font-family: 'bebas_neueregular', sans-serif;
+    font-family:14px;
+    font-weight: normal;
+
+
+}
+
+
+
+.dialog{
+    font-family: 'Terminal Dosis', Arial, sans-serif;
+    font-weight: normal;
+
+}
+
+.ic li img{
+    width:32px;
+    height:32px;
+
+}
+.twtr-doc{
+    border-radius:none;
+
+}
+
+.politica {
+    margin-bottom:5px;
+}
+
+.politica[name="lligua"],
+.politica[name="ulba"],
+.politica[name="verde"],
+.politica[name="negro"] {
+
+    background: none repeat scroll 0 0 #009999;
+    color     : #FFFFFF;
+    font-size :75%;
+    padding   : 0.4em;
+    text-align: left;
+}
+
+
+
+.items li[name="opiniones"]{
+    background:#DAD6D6;
+
+}
+
+
+
+.items li[name="distancia"]{
+    background:#EFE048;
+
+}
+
+.items li[name="tllegada"]{
+    background:#EDDA22;
+
+}
+.items li[name="altitud"]{
+    background:#E2CC00;
+
+}
+.items li[name="llevar"]{
+    background:silver;
+
+}
+
+
+
+
+
+.politica[name="ulba"] {
+    background:#0080FF;
+}
+
+
+.politica[name="verde"]{
+
+    background:#468C00;
+
+}
+.politica[name="negro"]{
+    background:#000000;		
+}
+
+
+
+
+.politica h2 {
+    font-family: 'bebas_neueregular',Arial,sans-serif;
+    font-weight: normal;
+    margin     :0px;
+    padding    :0px;
+}
+.politica h3 {
+    font-family: 'Terminal Dosis',Arial,sans-serif;
+    font-weight: normal;
+    margin     :0px;
+    padding    :0px;
+}
+
+
+
+.title{
+    border-bottom: 3px solid #FFBE00;
+    border-top   : 3px solid #FFBE00;
+    display      : block;
+    display      : inline-block;
+    /*margin-bottom: 5px;*/
+    margin-top   : 5px;
+    width        :100%;
+}
+
+.title2{
+    
+    border-bottom: 3px solid #FFBE00;
+    border-top   : 3px solid #FFBE00;
+    display      : block;
+    display      : inline-block;
+    margin-bottom: 10px;
+    margin-top   :5px;
+    width        :100%;
+
+
+}
+
+.title2 H1{
+    color        :black;
+    font-family  : 'bebas_neueregular',Helvetica;
+    font-size    :1.6875em;
+    font-weight  : normal;
+    margin       : 0;
+    padding-left : 80px;
+    text-align   : justify;
+}
+
+.title2 h4 {
+    
+    border        : 0 none;
+    color         :black;
+    font-family   : 'Terminal Dosis',Arial,sans-serif;
+    font-size     :0.875em;
+    font-style    : normal;
+    font-weight   : normal;
+    margin        : 0;
+    padding-bottom: 5px;
+    padding-left  : 80px;
+    text-align    : justify;
+    text-overflow : ellipsis;
+}
+
+
+.title H1{
+    color       :black;
+    font-family : 'bebas_neueregular',Helvetica;
+    font-size   : 1.2em;/*27px*/
+    font-weight : normal;
+    margin      : 0;
+    padding-left: 80px;
+    padding-top: 5px;
+    text-align  : justify;
+}
+
+.title h4 {
+    border        : 0 none;
+    color         :black;
+    font-family   : 'Terminal Dosis',Arial,sans-serif;
+    font-size     :1em;
+    font-style    : normal;
+    font-weight   : normal;
+    margin        : 0;
+    padding-bottom: 5px;
+    padding-left  : 80px;
+    padding-top   : 3px;
+    text-align    : justify;
+    text-overflow : ellipsis;
+}
+
+.icontitle {
+    -moz-transition: all 300ms linear 0s;
+    /* font-size   : 35px;*/
+    background     :#333;
+    color          :#FFF;
+    float          : left;
+    font-family    : 'WebSymbolsRegular',cursive;
+    font-size      :2.1875em;
+    height         :56px;
+    line-height    : 45px;
+    text-align     : center;
+    text-shadow    : 0 0 1px #333333;
+    width          : 70px;
+}
+
+
+.ui-body-a,.ui-dialog.ui-overlay-a {
+
+    background:none;
+}
+
+
+
+.ui-li-has-icon .ui-btn-inner a.ui-link-inherit, .ui-li-static.ui-li-has-icon{
+
+    /*background:#333;*/
+
+}
+
+.ui-dialog.ui-overlay-d{
+    box-shadow:none;
+    border:1px solid #999;
+
+}
+
+.center-text{text-align:center;}
+
+#hidepage{
+    background-color      :#FFF; 
+    height                :400px; 
+    layer-background-color:#FFF;
+    left                  :0px; 
+    padding-top           :80px;
+    position              : absolute; 
+    top                   :0px; 
+    width                 :100%;
+    z-index               :999999;
+}
+
+#hidepage img{
+    padding-top:40px;
+}
+
+.shadow2box img{
+    min-width:100%;
+
+}
+
+.ui-btn-text{
+font-family:'bebas_neueregular'!important;  
+font-weight: normal;
+text-shadow:none;
+font-size: 1.1em;
+
+}
+
+.ui-btn-active {
+    background:#F4C619 !important;
+}
+
+
+.ui-content .ui-listview-inset, .ui-panel-inner .ui-listview-inset {
+    margin: 1em 0 0 0;
+}
+
+
+div .ui-collapsible-content {
+padding: 5px 0px;
+
+}
+
+#sitios_mapa{
+margin: 0 0.5em;
+padding-left: 5px;
+padding-right: 5px;
+}
+
+.ui-content{
+
+ padding: 15px 5px !important;  
+}
+
+.ui-collapsible-content > .ui-listview {
+    margin: -10px 0.3px !important;
+}
+
+
+.ui-li-heading {
+    margin-top: 0 !important;
+    padding-top: 0;
+}
+
+.ui-body-a, .ui-overlay-a{
+background: white !important;
+
+}
+
+body .maps{
+
+padding-left: 5px !important;
+padding-right: 5px !important;
+
+}
+
+/*#comments_list_35{
+
+padding-right: 15px !important;
+padding-left: 15px !important;
+
+}
+*/
+
+@media only screen and (min-width: 480px) {
+    .bannerr {
+        background-repeat: no-repeat;
+        background-image: url('../images/banner_480.jpg');
+    }
+
+  
+
+}
+
+@media only screen and (max-width: 800px) {
+    .items li {
+        width:100%;
+    }
+}
+
+
+
+}
+
+@media only screen and (max-width: 916px) {
+#comments_list_35{
+padding-right: 15px !important;
+padding-left: 15px !important;
+    }
+}
+
+@media only screen and (max-width: 320px) {
+ 
+    
+.shadow2box img{max-width:90%;} 
+.shadow2box    {margin-top:-5px; }  
+    
+
+     }
+@media only screen and (max-width: 420px) {
+  .foto{
+
+                               
+                }
+}
+
+
+
+@media only screen and (min-width: 600px) {
+    
+    
+    
+   .laciudad p{
+        
+    }
+
+    
+
+}
+
+@media only screen and (max-width: 420px) {
+  .foto{
+
+                height:0px;
+                overflow:hidden;
+                visibility: hidden;
+                text-indent:-666px;
+                
+                }
+}

@@ -1,0 +1,11 @@
+CREATE  TABLE `rutamobil`.`votacion` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `voto` INT NULL ,
+  `id_lugar` INT NULL ,
+  PRIMARY KEY (`id`) ,
+  INDEX `fk_lugar_votos` (`id` ASC) ,
+  CONSTRAINT `fk_lugar_votos`
+    FOREIGN KEY (`id` )
+    REFERENCES `rutamobil`.`lugar` (`id` )
+   ON DELETE NO ACTION
+    ON UPDATE NO ACTION);

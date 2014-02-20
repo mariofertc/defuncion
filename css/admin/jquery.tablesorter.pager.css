@@ -1,0 +1,38 @@
+div.Pager {
+        padding: 10px 0 10px 0;
+        background-color: #FFFFFF;
+       font-family:Verdana;
+       font-size:8px;
+}
+div.tablesorterPager {
+        padding: 10px 0 10px 0;
+        background-color: #D6D2C2;
+      
+}
+div.tablesorterPager span {
+        padding: 0 5px 0 5px;
+}
+div.tablesorterPager input.prev {
+        width: auto;
+        margin-right: 10px;
+}
+div.tablesorterPager input.next {
+        width: auto;
+        margin-left: 10px;
+}
+div.tablesorterPager input {
+        font-size: 10px;
+        width: 50px;
+        border: 1px solid #330000;
+        text-align: center;
+}
+div.tablesorterPager select {
+        font-size: 10px;
+        width: 100px;
+        border: 1px solid #330000;
+        text-align: center;
+}
+div.tablesorterPager img {
+        text-align: center;
+		vertical-align: middle;
+}

@@ -1,0 +1,1 @@
+ alter table fotos add column orden varchar(255) default 0

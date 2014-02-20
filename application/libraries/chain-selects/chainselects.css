@@ -1,0 +1,6 @@
+
+#chainselect_wrap select { margin: 5px 0 !important; padding: 3px !important; width: 100% !important; }
+
+#chainselect_wrap #chainselects_submit { margin: 5px 0 !important; padding: 5px 10px !important; }
+
+#chainselect_wrap #chainselects_loading { background: url(ajax-loader.gif) no-repeat center; !important; display: none; float: right !important; height: 30px !important; margin: 5px 0 0 0 !important; width: 55px !important; } 

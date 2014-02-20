@@ -1,0 +1,16 @@
+body{
+
+    background-attachment: fixed;
+    background-image: url("../images/cenefa2.png"),url("../images/cenefa.png");
+    background-position: center bottom, center top;
+    background-repeat: repeat-x, no-repeat;
+
+
+}
+#container{
+
+width: 50%;
+margin:0 auto;
+
+
+}
