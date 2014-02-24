@@ -1,1 +1,0 @@
-alter table lugar modify interes varchar(2048);

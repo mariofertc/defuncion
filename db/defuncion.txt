@@ -1,0 +1,448 @@
+CREATE TABLE `defuncion` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `motivo` varchar(1024) DEFAULT NULL,
+  `observaciones` varchar(250) DEFAULT NULL,
+  `aliento_etilico` int(1) NOT NULL,
+  `valor_alcochek` varchar(20) NOT NULL,
+  `factores_agravantes` varchar(20) NOT NULL,
+  `fecha_actualizacion` datetime NOT NULL,
+  `doctor_id` int(11) NOT NULL,
+  `paciente_id` int(11) NOT NULL,
+  `deleted` int(1) DEFAULT '0',	
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_pacien_defu` FOREIGN KEY (`paciente_id`) REFERENCES `paciente` (`persona_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_doctor_defu` FOREIGN KEY (`doctor_id`) REFERENCES `doctor` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+create table accidente
+(id int(11) not null auto_increment,
+nombre varchar(50),
+PRIMARY KEY (`id`)
+);
+insert into accidente values(null,'Accidente de Transito'),(null,'Caida'),(null,'Quemaduras');
+
+create table defuncion_accidente
+(defuncion_id int(11) not null,
+accidente_id int(11) not null,
+  CONSTRAINT `fk_defuncion_acc_inter` FOREIGN KEY (`defuncion_id`) REFERENCES `defuncion` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_accidente_pac_inter` FOREIGN KEY (`accidente_id`) REFERENCES `accidente` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+
+create table sistemas
+(id int(11) not null auto_increment,
+nombre varchar(50),
+PRIMARY KEY (`id`)
+);
+
+create table defuncion_sistemas
+(paciente_id int(11) not null,
+id_sistemas int(11) not null,
+  CONSTRAINT `fk_defuncion_sis_inter` FOREIGN KEY (`defuncion_id`) REFERENCES `defuncion` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_sistemas_pac_inter` FOREIGN KEY (`paciente_id`) REFERENCES `sistemas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+
+CREATE TABLE `consulta` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `embarazada` int(1) NOT NULL,
+  `motivo` varchar(1024) DEFAULT NULL,
+  `enfermedad` varchar(256) NOT NULL,
+  `presion_arterial` varchar(20) DEFAULT NULL,
+  `frecuencia_cardiaca` varchar(20) NOT NULL,
+  `temperatura` varchar(20) NOT NULL,
+  `frecuencia_respiratoria` varchar(20) NOT NULL,
+  `fecha_actualizacion` datetime NOT NULL,
+  `receta` varchar(1024) DEFAULT NULL,
+  `doctor_id` int(11) NOT NULL,
+  `paciente_id` int(11) NOT NULL,
+  `deleted` int(1) DEFAULT '0',
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_pacien_consulta` FOREIGN KEY (`paciente_id`) REFERENCES `paciente` (`persona_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_doctor_consulta` FOREIGN KEY (`doctor_id`) REFERENCES `doctor` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+--
+-- Table structure for table `centro_salud`
+--
+
+DROP TABLE IF EXISTS `centro_salud`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `centro_salud` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(45) DEFAULT NULL,
+  `descripcion` varchar(255) DEFAULT NULL,
+  `ciudad_id` int(11) NOT NULL,
+  `nombre_enlace` varchar(45) DEFAULT NULL,
+  `icon` varchar(4) DEFAULT NULL,
+  `deleted` int(1) DEFAULT '0',
+  `order` int(1) DEFAULT '0',
+  PRIMARY KEY (`id`,`ciudad_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `centro_salud`
+--
+
+LOCK TABLES `centro_salud` WRITE;
+/*!40000 ALTER TABLE `centro_salud` DISABLE KEYS */;
+INSERT INTO `centro_salud` VALUES (1,'Hospital Eugenio Espejo','6 de Diciembre.',1,'0','0',0,3),(2,'Atractivos Turísticos','Zoológico, Serpentario, Volcán, etc.',1,'atractivos','C',0,2),(3,'Zoológico','Visita el Serpentario, Zoológico, etc.',1,'zoologico','C',0,0),(4,'Deportes','Downhill, rapting, cañoning, etc.',1,'deportes','C',0,1),(5,'Balneareos','Termas de la virgen,tambo,etc.',1,'balneareos','C',0,0),(6,'Cascadas','Bascum, Manto de la novia, Pailon, etc.',1,'cascadas','C',0,0),(7,'Miradores','Ojos del volcan, cruz de bellavista, etc.',1,'miradores','C',0,0),(8,'Artesanías','Talleres, Paseo artesanal, etc.',1,'artesanias','C',0,0),(9,'xxxc','xxxd',1,'xxxe',NULL,1,0),(10,'x','xx',1,'xxx',NULL,1,0),(11,'x','xx',1,'xxx',NULL,1,0),(12,'ccc','cccc',1,'ccccc',NULL,1,0),(13,'xx','xxx',1,'xxxx',NULL,1,0),(14,'xx','xxx',1,'xxxx',NULL,1,0),(15,'x','xx',1,'xxxx',NULL,1,0),(16,'x','x',1,'x',NULL,1,0),(17,'Ruta Ecológica','Entrada al Zooo',1,'ruta_ecologica','d',0,0);
+/*!40000 ALTER TABLE `centro_salud` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+--
+-- Table structure for table `comentario`
+--
+
+DROP TABLE IF EXISTS `comentario`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `comentario` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `titulo` varchar(255) DEFAULT NULL,
+  `mensaje` varchar(500) DEFAULT NULL,
+  `nombre_comentario` varchar(45) DEFAULT NULL,
+  `fecha` datetime DEFAULT NULL,
+  `email` varchar(45) DEFAULT NULL,
+  `coordenadas` varchar(45) DEFAULT NULL,
+  `id_lugar` int(11) DEFAULT NULL,
+  `deleted` int(1) DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `id_lugar` (`id_lugar`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `comentario`
+--
+
+LOCK TABLES `comentario` WRITE;
+/*!40000 ALTER TABLE `comentario` DISABLE KEYS */;
+INSERT INTO `comentario` VALUES (1,'Most wonderfull','Un lindo lugar para compartir','mariofertc','2013-04-28 11:54:03',NULL,NULL,3,0),(2,'Most wonderfull','Un lindo lugar para compartir','mariofertc','2013-04-28 11:55:12',NULL,NULL,3,0),(3,'Most wonderfull','Un lindo lugar para compartir','mariofertc','2013-04-28 11:56:21',NULL,NULL,3,0),(4,'Most wonderfull','Un lindo lugar para compartir','mariofertc','2013-04-28 11:56:50',NULL,NULL,3,0),(5,'Most wonderfull','Un lindo lugar para compartir','mariofertc','2013-04-28 12:16:12',NULL,NULL,3,0),(6,'Most wonderfull','Un lindo lugar para compartir','mariofertc','2013-04-28 12:24:17',NULL,NULL,3,1),(7,'Most wonderfull2','Un lindo lugar para compartir2','mariofertc2','2013-04-28 13:05:01',NULL,NULL,3,1);
+/*!40000 ALTER TABLE `comentario` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `persona`
+--
+
+DROP TABLE IF EXISTS `persona`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `persona` (
+  `nombre` varchar(255) NOT NULL,
+  `apellido` varchar(255) NOT NULL,
+  `telefono` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `direccion` varchar(255) NOT NULL,
+  `ciudad` varchar(255) NOT NULL,
+  `pais` varchar(255) NOT NULL,
+  `comentarios` text NOT NULL,
+  `persona_id` int(10) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`persona_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `persona`
+--
+
+LOCK TABLES `persona` WRITE;
+/*!40000 ALTER TABLE `persona` DISABLE KEYS */;
+INSERT INTO `persona` VALUES ('Mario','Torres','245979','mariofertc@mixmail.com','Urb. Los Chasquis','Ambato','Ecuador','Bastantes',2),('Carlos','Sanchez','','','','','','',3),('pilar','bustamante','','','','','','',4),('Paola','Inca','','fq@ty.co','','','','',5),('ginger','saltos','','','','','','',6),('Juanita','Burbano','','','','','','',9);
+/*!40000 ALTER TABLE `persona` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+--
+-- Table structure for table `doctor`
+--
+
+DROP TABLE IF EXISTS `doctor`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `doctor` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(256) NOT NULL,
+  `direccion` varchar(1024) DEFAULT NULL,
+  `coordenadas` varchar(256) NOT NULL,
+  `imagen_path` varchar(256) DEFAULT NULL,
+  `descripcion` varchar(1024) NOT NULL,
+  `fecha_actualizacion` datetime NOT NULL,
+  `categoria_id` int(11) NOT NULL,
+  `interes` varchar(1024) DEFAULT NULL,
+  `nombre_enlace` varchar(100) DEFAULT NULL,
+  `sector` varchar(255) DEFAULT NULL,
+  `deleted` int(1) DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `fk_lugar_categoria` (`categoria_id`),
+  CONSTRAINT `fk_lugar_categoria` FOREIGN KEY (`categoria_id`) REFERENCES `centro_salud` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `doctor`
+--
+
+LOCK TABLES `doctor` WRITE;
+/*!40000 ALTER TABLE `doctor` DISABLE KEYS */;
+INSERT INTO `doctor` VALUES (2,'Mario Torres','fortaleza y montego','{\"latitud\":\"-1.398773\",\"longitud\":\"-78.514838\"}','iglesia_test.jpg','Ginecologo','2014-02-05 07:07:11',1,'Su cabecera es la ciudad de Baños; cuenta con una parroquia urbana que es Baños (La Matriz).','iglesia','Centro de la Ciudad',0),(3,'Juan Perez','Entrada a Baños','{\"latitud\":-1.398773,\"longitud\":-78.414838}','uno.jpg','Medico General','2014-02-05 07:12:08',2,'Su cabecera es la ciudad de Baños; cuenta con una parroquia urbana que es Baños (La Matriz).','zoo','San Francisco',0),(4,'Jhon Doe','General Estuardo','{\"latitud\":200,\"longitud\":100}','dos.jpg','Otorrinolaringología','2014-02-05 07:12:44',2,'Su cabecera es la ciudad de Baños; cuenta con una parroquia urbana que es Baños (La Matriz).','volcan','Ulba',0),(5,'Wilmer Pilco','Juan Tamarengo','{\"latitud\":\"202\",\"longitud\":\"102\"}','pavoreal.jpg','Medicina General','2014-02-05 07:13:20',2,'Su cabecera es la ciudad de Baños; cuenta con una parroquia urbana que es Baños (La Matriz).','lugares','Ulba',0),(6,'Yolanda Flores','Velizaio Quevedo esq.','{\"latitud\":\"-1.398781\",\"longitud\":\"-78.514850\"}','aguila.jpg','Pediatría','2014-02-05 07:13:45',2,'Su cabecera es la ciudad de Baños; cuenta con una parroquia urbana que es Baños (La Matriz).','external','Ulba',0),(11,'Julia Benavides','Sector Los Cerros','{\"latitud\":-1.398773,\"longitud\":-78.314838}',NULL,'Traumatología','2014-02-05 07:14:19',17,'Esta es una vista maravillosa','san_francisco','San Francisco',0),(12,'Mauricio Flores','Bolívar y Castillos','{\"latitud\":\"-1.598780\",\"longitud\":\"-76.614850\"}','0011.jpg','Enfermería','2014-02-05 07:15:00',1,'Fundada en 1964','iglesia_catedral','Casco Central',0);
+/*!40000 ALTER TABLE `doctor` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `empleado`
+--
+
+DROP TABLE IF EXISTS `empleado`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `empleado` (
+  `usuario` varchar(255) NOT NULL,
+  `clave` varchar(255) NOT NULL,
+  `persona_id` int(10) NOT NULL,
+  `deleted` int(1) NOT NULL DEFAULT '0',
+  UNIQUE KEY `usuario` (`usuario`),
+  KEY `persona_id` (`persona_id`),
+  CONSTRAINT `persona_empleado` FOREIGN KEY (`persona_id`) REFERENCES `persona` (`persona_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `empleado`
+--
+
+LOCK TABLES `empleado` WRITE;
+/*!40000 ALTER TABLE `empleado` DISABLE KEYS */;
+INSERT INTO `empleado` VALUES ('csanchez','25d55ad283aa400af464c76d713c07ad',3,1),('gsaltos','25d55ad283aa400af464c76d713c07ad',6,1),('mariofertc','cebdd715d4ecaafee8f147c2e85e0754',2,0),('pbustamante','25d55ad283aa400af464c76d713c07ad',4,1),('pinca','25d55ad283aa400af464c76d713c07ad',5,0);
+/*!40000 ALTER TABLE `empleado` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `log_evento`
+--
+
+DROP TABLE IF EXISTS `log_evento`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `log_evento` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(45) DEFAULT NULL,
+  `modulo` varchar(45) DEFAULT NULL,
+  `stack_trace` varchar(45) DEFAULT NULL,
+  `fecha` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `log_evento`
+--
+
+LOCK TABLES `log_evento` WRITE;
+/*!40000 ALTER TABLE `log_evento` DISABLE KEYS */;
+/*!40000 ALTER TABLE `log_evento` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `modulo`
+--
+
+DROP TABLE IF EXISTS `modulo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `modulo` (
+  `nombre_leng_key` varchar(255) NOT NULL,
+  `desc_leng_key` varchar(255) NOT NULL,
+  `orden` int(10) NOT NULL,
+  `modulo_id` varchar(255) NOT NULL,
+  PRIMARY KEY (`modulo_id`),
+  UNIQUE KEY `desc_leng_key` (`desc_leng_key`),
+  UNIQUE KEY `nombre_leng_key` (`nombre_leng_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `modulo`
+--
+
+LOCK TABLES `modulo` WRITE;
+/*!40000 ALTER TABLE `modulo` DISABLE KEYS */;
+INSERT INTO `modulo` VALUES ('modulo_centro_salud','modulo_centro_salud_desc',0,'centro_salud'),('modulo_comentarios','modulo_comentarios_desc',4,'comentarios'),('modulo_doctor','modulo_centro_doctor_desc',1,'doctor'),('modulo_empleados','modulo_empleados_desc',2,'empleados'),('modulo_paciente','modulo_paciente_desc',3,'paciente');
+/*!40000 ALTER TABLE `modulo` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `paciente`
+--
+
+DROP TABLE IF EXISTS `paciente`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `paciente` (
+  `usuario` varchar(255) NOT NULL,
+  `persona_id` int(10) NOT NULL,
+  `deleted` int(1) NOT NULL DEFAULT '0',
+  UNIQUE KEY `usuario` (`usuario`),
+  KEY `persona_id` (`persona_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `paciente`
+--
+
+LOCK TABLES `paciente` WRITE;
+/*!40000 ALTER TABLE `paciente` DISABLE KEYS */;
+INSERT INTO `paciente` VALUES ('00001',9,0);
+/*!40000 ALTER TABLE `paciente` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `permiso`
+--
+
+DROP TABLE IF EXISTS `permiso`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `permiso` (
+  `modulo_id` varchar(255) NOT NULL,
+  `persona_id` int(10) NOT NULL,
+  PRIMARY KEY (`modulo_id`,`persona_id`),
+  KEY `person_id` (`persona_id`),
+  CONSTRAINT `modulo_permiso` FOREIGN KEY (`modulo_id`) REFERENCES `modulo` (`modulo_id`),
+  CONSTRAINT `persona_permiso` FOREIGN KEY (`persona_id`) REFERENCES `empleado` (`persona_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `permiso`
+--
+
+LOCK TABLES `permiso` WRITE;
+/*!40000 ALTER TABLE `permiso` DISABLE KEYS */;
+INSERT INTO `permiso` VALUES ('centro_salud',2),('comentarios',2),('doctor',2),('empleados',2),('paciente',2);
+/*!40000 ALTER TABLE `permiso` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+--
+-- Table structure for table `provincia`
+--
+
+DROP TABLE IF EXISTS `provincia`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `provincia` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(45) DEFAULT NULL,
+  `descripcion` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `provincia`
+--
+
+LOCK TABLES `provincia` WRITE;
+/*!40000 ALTER TABLE `provincia` DISABLE KEYS */;
+INSERT INTO `provincia` VALUES (1,'Tungurahua',NULL),(2,'asd',''),(3,'Pichincha','ProvinciaCerca'),(4,'afadsfadf','adfadfafaf'),(5,'dsafdsf','asdfadsaffa'),(6,'dsfadfasdf','asdfsdafadf'),(7,'asdfadfad','adsfadfadf'),(8,'Carchi','adfadfadfadfaf'),(9,'Loja','adfadfadsfa'),(10,'Esmeraldas','ProvinciaVerde'),(11,'El Oro','asdfasdfasdfd'),(12,'asdf  sdaf','asdfasdf'),(13,'adf da','asdf   dfdasd'),(14,'samantha','Anahi torres aldas');
+/*!40000 ALTER TABLE `provincia` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sessions`
+--
+
+DROP TABLE IF EXISTS `sessions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sessions` (
+  `session_id` varchar(40) NOT NULL DEFAULT '0',
+  `ip_address` varchar(16) NOT NULL DEFAULT '0',
+  `user_agent` varchar(250) NOT NULL,
+  `last_activity` int(10) unsigned NOT NULL DEFAULT '0',
+  `user_data` text,
+  PRIMARY KEY (`session_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sessions`
+--
+
+LOCK TABLES `sessions` WRITE;
+/*!40000 ALTER TABLE `sessions` DISABLE KEYS */;
+INSERT INTO `sessions` VALUES ('d54b81c073636ee88fc03e09498d0d64','127.0.0.1','Mozilla/5.0 (Windows NT 6.1; WOW64; rv:26.0) Gecko/20100101 Firefox/26.0',1391654869,'a:2:{s:9:\"user_data\";s:0:\"\";s:10:\"persona_id\";s:1:\"2\";}');
+/*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `usuario`
+--
+
+DROP TABLE IF EXISTS `usuario`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `usuario` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `usuario` varchar(45) DEFAULT NULL,
+  `clave` varchar(45) DEFAULT NULL,
+  `nombre` varchar(45) DEFAULT NULL,
+  `apellido` varchar(45) DEFAULT NULL,
+  `direccion` varchar(245) DEFAULT NULL,
+  `email` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `usuario`
+--
+
+LOCK TABLES `usuario` WRITE;
+/*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
+/*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `votacion`
+--
+
+DROP TABLE IF EXISTS `votacion`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `votacion` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `voto` int(11) DEFAULT NULL,
+  `id_lugar` int(11) DEFAULT NULL,
+  `ip1` varchar(45) DEFAULT NULL,
+  `ip2` varchar(45) DEFAULT NULL,
+  `fecha` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_lugar_votos` (`id_lugar`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `votacion`
+--
+
+LOCK TABLES `votacion` WRITE;
+/*!40000 ALTER TABLE `votacion` DISABLE KEYS */;
+INSERT INTO `votacion` VALUES (2,0,0,'127.0.0.1','0','2013-05-07 23:55:23'),(3,0,0,'127.0.0.1','0','2013-05-07 23:56:02'),(4,0,0,'127.0.0.1','0','2013-05-07 23:58:34'),(5,0,3,'127.0.0.1','0','2013-05-08 00:02:30'),(6,1,3,'127.0.0.1','0','2013-05-08 00:03:48'),(8,1,3,'127.0.0.1','0','2013-05-08 00:07:00'),(9,1,3,'127.0.0.1','0','2013-05-08 00:08:23'),(10,1,3,'127.0.0.1','0','2013-05-08 00:08:47'),(11,1,3,'127.0.0.1','0','2013-05-08 00:09:04'),(12,1,3,'127.0.0.1','0','2013-05-08 00:09:40'),(13,1,4,'127.0.0.1','0','2013-05-08 00:10:14'),(14,1,4,'127.0.0.1','0','2013-06-06 20:42:44'),(15,1,4,'127.0.0.1','0','2013-06-06 20:43:05');
+/*!40000 ALTER TABLE `votacion` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2014-02-05 23:51:34

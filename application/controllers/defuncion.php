@@ -76,7 +76,7 @@ class Defuncion extends Secure_area {
      * @param int $categoria_id
      */
     function view($id = -1, $paciente_id = -1) {
-        $id = $this->input->get('id');
+        $id = $this->input->get('id')?$this->input->get('id'):-1;
         $data['info'] = $this->defuncion_model->get_info($id);
         $doctores = $this->doctor_model->get_all();
         $data['doctor'] = -1;
@@ -119,6 +119,9 @@ class Defuncion extends Secure_area {
             'doctor_id' => $this->input->post('doctor'),
             'fecha_actualizacion' => date('Y-m-d h:i:s')
         );
+        
+        if ($this->input->post('paciente_id') != -1 && $this->input->post('paciente_id'))
+            $data['paciente_id'] = $this->input->post('paciente_id');
         $this->db->trans_start();
         try {
             if ($this->defuncion_model->save($data, $id)) {

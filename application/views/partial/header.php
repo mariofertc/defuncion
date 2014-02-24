@@ -22,9 +22,9 @@
                 </div>
                 <div id="menubar_navigation">
                     <div class="menu_item">
-                        <a href="<?php echo base_url(); ?>">
+                        <a href="<?php echo base_url().'index.php'; ?>">
                             <img src="<?php echo base_url() . 'images/administracion/home.png'; ?>" border="0" alt="Menubar Image" /></a><br />
-                        <a href="<?php echo base_url(); ?>">Inicio</a>
+                        <a href="<?php echo base_url().'index.php'; ?>">Inicio</a>
                     </div>
 
                     <?php

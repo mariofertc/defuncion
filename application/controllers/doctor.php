@@ -76,7 +76,7 @@ class Doctor extends Persona_controller {
     function view($id = -1, $categoria_id = -1) {
         $id = $this->input->get('id');
         $data['info'] = $this->doctor_model->get_info($id);
-        $data['categoria_id'] = $this->input->get('categoria_id');
+        $data['categoria_id'] = $this->input->get('categoria_id')?$this->input->get('categoria_id'):$categoria_id;
 
         $this->load->view("doctor/form", $data);
     }
