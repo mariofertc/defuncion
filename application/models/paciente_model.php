@@ -305,6 +305,19 @@ class Paciente_model extends Persona {
 
         return $this->db->get();
     }
+    /**
+     * Get by carnet
+     * @param type $search
+     * @return type
+     */
+    function get_by_carnet($search) {
+        $this->db->from('paciente');
+        $this->db->join('persona', 'paciente.persona_id=persona.persona_id');
+        $this->db->where("(usuario LIKE '%" . $this->db->escape_like_str($search) . "%') and deleted=0");
+        $this->db->order_by("apellido", "asc");
+
+        return $this->db->get();
+    }
 }
 
 /* End of file empleado.php */

@@ -4,7 +4,7 @@
 //echo form_open('incidencias/find_incidencia_info/'.$incidencia_info->id,array('id'=>'incidencia_number_form'));
 ?>
 <?php
-echo form_open_multipart('consulta/save/' . $info->id, array('id' => 'form'));
+echo form_open_multipart('defuncion/save/' . $info->id, array('id' => 'form'));
 ?>
 
 <fieldset id="employee_basic_info">
@@ -34,7 +34,7 @@ echo form_open_multipart('consulta/save/' . $info->id, array('id' => 'form'));
         <?php echo form_label('Accidente:', 'accidente', array('class' => 'ssmall_wide')); ?>
         <div class='form_field'>
             <?php
-            echo form_multiselect('accidente',$accidentes,$accidente_db );
+            echo form_multiselect('accidente[]',$accidentes,$accidente_db );
             ?>
         </div>
     </div>
@@ -85,8 +85,6 @@ echo form_open_multipart('consulta/save/' . $info->id, array('id' => 'form'));
 <br>
 <?php
 echo form_submit(array(
-    'name' => 'submit',
-    'id' => 'submit',
     'value' => 'Guardar',
     'class' => 'submit_button float_right')
 );
@@ -112,7 +110,7 @@ echo form_close();
                     success:function(response)
                     {
                         tb_remove();
-                        post_lugar_form_submit(response);
+                        post_form_submit(response);
                     },
                     dataType:'json'
                 });

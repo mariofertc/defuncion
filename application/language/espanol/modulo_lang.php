@@ -1,27 +1,27 @@
 <?php
 $lang['modulo_home']='Inicio';
 
-$lang['modulo_categorias']='Categorias';
-$lang['modulo_categorias_desc']='Agregar, Actualizar, Borrar y Buscar Categorias';
+$lang['modulo_centro_salud']='Centros de Salud';
+$lang['modulo_centro_salud_desc']='Agregar, Actualizar, Borrar y Buscar Centros de salud';
 
-$lang['modulo_lugares']='Lugares';
-$lang['modulo_lugares_desc']='Agregar, Actualizar, Borrar y Buscar Lugares';
+$lang['modulo_doctor']='Doctores';
+$lang['modulo_doctor_desc']='Agregar, Actualizar, Borrar y Buscar Doctores';
 
-$lang['modulo_fotos']='Fotos';
-$lang['modulo_fotos_desc']='Agregar, Actualizar, Borrar y Buscar Fotografías';
+$lang['modulo_paciente']='Pacientes';
+$lang['modulo_paciente_desc']='Agregar, Actualizar, Borrar y Buscar Pacientes';
 
 $lang['modulo_comentarios']='Comentarios';
 $lang['modulo_comentarios_desc']='Agregar, Actualizar, Borrar y Buscar Comentarios';
 
 
-$lang['modulo_suppliers']='Proveedores';
-$lang['modulo_suppliers_desc']='Agregar, Actualizar, Borrar y Buscar proveedores';
+$lang['modulo_defuncion']='Defunción';
+$lang['modulo_defuncion_desc']='Agregar, Actualizar, Borrar y Buscar defunciones';
 
 $lang['modulo_empleados']='Usuarios';
 $lang['modulo_empleados_desc']='Agregar, Actualizar, Borrar y Buscar usuarios';
 
-$lang['modulo_sales']='Ventas';
-$lang['modulo_sales_desc']='Procesar ventas y devoluciones';
+$lang['modulo_consulta']='Consultas';
+$lang['modulo_consulta_desc']='Agregar, Actualizar, Borrar y Buscar Consultas';
 
 $lang['modulo_reports']='Reportes';
 $lang['modulo_reports_desc']='Ver y generar reportes';

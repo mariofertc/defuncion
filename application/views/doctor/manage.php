@@ -20,11 +20,6 @@
 		echo anchor("$controller_name/view/-1/$id_categoria?width=$form_width&height=$form_height", "<div class='big_button' style='float: right;margin-right: 0;'><span>" . $this->lang->line($controller_name . '_new') . "</span></div>", array('class' => 'thickbox none', 'title' => $this->lang->line($controller_name . '_new')));
 		?>
 	</div>
-	<div id="new_buttond">
-		<?php
-		echo anchor("categorias", "<div class='big_button' style='float: right;margin-right: 14%;'><span>" . $this->lang->line('categorias_categoria') . "</span></div>", array('title' => $this->lang->line('categorias_categoria')));
-		?>
-	</div>
 </div>
 <div id="table_action_header">
 	<ul>

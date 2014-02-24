@@ -42,7 +42,8 @@ class Consulta_model extends CI_Model {
 //        $this->db->select('consulta.*, paciente.persona_id as paciente_id, doctor.id as doctor_id FROM paciente, persona,doctor,consulta where persona.persona_id = paciente.persona_id and paciente.persona_id = consulta.paciente_id and consulta.deleted = 0 ' .
         $this->db->select('consulta.*, paciente.persona_id as paciente_id FROM paciente, persona,consulta where persona.persona_id = paciente.persona_id and paciente.persona_id = consulta.paciente_id and consulta.deleted = 0 ' .
                 $where);
-        $this->db->order_by($order);
+        if($order)
+            $this->db->order_by($order);
         $this->db->limit($offset + $num, $offset);
         $db = $this->db->get();
 //        echo $this->db->last_query();

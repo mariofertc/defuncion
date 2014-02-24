@@ -115,8 +115,6 @@ echo form_open_multipart('consulta/save/' . $info->id, array('id' => 'form'));
 <br>
 <?php
 echo form_submit(array(
-    'name' => 'submit',
-    'id' => 'submit',
     'value' => 'Guardar',
     'class' => 'submit_button float_right')
 );

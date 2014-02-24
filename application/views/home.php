@@ -5,7 +5,7 @@
     <?php
     foreach ($allowed_modules->result() as $modulo) {
         echo $modulo->modulo_id;
-        if ($modulo->modulo_id == 'lugares' ||$modulo->modulo_id=='fotos')
+        if ($modulo->modulo_id == 'consulta' ||$modulo->modulo_id=='defuncion')
             continue;
         ?>
         <div class="module_item">

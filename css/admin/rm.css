@@ -9,8 +9,10 @@
 @import url(thickbox.css);
 @import url(datepicker.css);
 @import url(editsale.css);
-@import "http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css";
-@import "http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables_themeroller.css";
+/*@import "http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css";
+@import "http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables_themeroller.css";*/
+@import "../../js/admin/datatables/css/jquery.dataTables.css";
+@import "../../js/admin/datatables/css/jquery.dataTables_themeroller.css";
 
 /*@import url(jquery.tablesorter.pager.css);*/
 /*@import url(../../js/admin/datatables/css/demo_table_jui.css);
@@ -38,7 +40,7 @@ body
 	background-color: #fff;
 	font: 13px/20px normal Helvetica, Arial, sans-serif;
 	color: #4F5155;*/
-        background-color:#999999;
+        background-color:#d6d6d6;
 
 
     

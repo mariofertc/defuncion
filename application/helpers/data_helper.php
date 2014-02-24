@@ -130,5 +130,3 @@ function getColumnAccion($cllAccion, $id) {
     }
     return $accion;
 }
-
-?>

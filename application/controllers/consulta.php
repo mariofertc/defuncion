@@ -64,12 +64,7 @@ class Consulta extends Secure_area {
                 'language' => "_update",
                 'width' => $this->get_form_width(),
                 'height' => $this->get_form_height(),
-                'class' => 'thickbox'),
-            '2' => array('function' => "fotos",
-                'comun_language' => "fotos_foto",
-                'language' => "_muestra",
-                'height' => 200,
-                'class' => 'boton_admin'));
+                'class' => 'thickbox'));
         $cllWhere = isset($id_paciente)?'and persona.persona_id = ' . $id_paciente: null;
         echo getData('consulta_model', $aColumns, $cllAccion, $cllWhere);
     }

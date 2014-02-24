@@ -61,7 +61,7 @@ class Centro_salud extends Secure_area {
                 'height' => $this->get_form_height(),
                 'class' => 'thickbox'),
             '2' => array('function' => "../doctor",
-                'comun_language' => "lugares_lugar",
+                'comun_language' => "doctor_doctores",
                 'language' => "_muestra",
                 'height' => 200,
                 'class' => "boton_admin"));
@@ -86,6 +86,7 @@ class Centro_salud extends Secure_area {
      * @param type $id
      */
     function view($id = -1) {
+        $id = $this->input->get('id');
         $data['info'] = $this->centro_salud_model->get_info($id);
         $this->load->view("centro_salud/form", $data);
     }

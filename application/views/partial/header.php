@@ -22,15 +22,15 @@
                 </div>
                 <div id="menubar_navigation">
                     <div class="menu_item">
-                        <a href="<?php echo site_url('home'); ?>">
+                        <a href="<?php echo base_url(); ?>">
                             <img src="<?php echo base_url() . 'images/administracion/home.png'; ?>" border="0" alt="Menubar Image" /></a><br />
-                        <a href="<?php echo site_url("home"); ?>">Inicio</a>
+                        <a href="<?php echo base_url(); ?>">Inicio</a>
                     </div>
 
                     <?php
                     if (isset($allowed_modules)) {
                         foreach ($allowed_modules->result() as $modulo) {
-                            if ($modulo->modulo_id == 'lugares' || $modulo->modulo_id == 'fotos')
+                            if ($modulo->modulo_id == 'consulta' || $modulo->modulo_id == 'defuncion')
                                 continue;
                             ?>
 
@@ -43,6 +43,12 @@
                         }
                     }
                     ?>
+                    <div class="menu_item">
+                        <a href="<?php echo site_url('home'); ?>">
+                            <img src="<?php echo base_url() . 'images/administracion/administraciones.png'; ?>" border="0" alt="Menubar Image" /></a><br />
+                        <a href="<?php echo site_url("home"); ?>">Administración</a>
+                    </div>
+                    
                 </div>
 <?php if (isset($allowed_modules)) { ?>
                 <div id="menubar_footer">

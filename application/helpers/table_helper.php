@@ -39,7 +39,7 @@ function get_centro_salud_data_row($data,$controller)
 	$table_data_row.='<td width="20%">'.character_limiter($data->nombre_enlace,13).'</td>';
 	$table_data_row.='<td width="20%">'.character_limiter($data->order,13).'</td>';
 	$table_data_row.='<td width="5%">'.anchor($controller_name."/view/$data->id?width=".$width."&height=".$height, $CI->lang->line('comun_edit'),array('class'=>'thickbox','title'=>$CI->lang->line($controller_name.'_update')));		
-	$table_data_row.='&nbsp;'.anchor($controller_name."/lugares/$data->id?width=".$width."&height".$height, $CI->lang->line('lugares_lugar'),array('class'=>'boton_admin','title'=>$CI->lang->line($controller_name.'_muestra'))).'</td>';
+	$table_data_row.='&nbsp;'.anchor("/doctor?id=$data->id&width=".$width."&height".$height, $CI->lang->line('doctor_doctores'),array('class'=>'boton_admin','title'=>$CI->lang->line($controller_name.'_muestra'))).'</td>';
 	$table_data_row.='</tr>';
 	
 	return $table_data_row;
@@ -83,8 +83,7 @@ function get_doctor_data_row($data,$controller)
 	$table_data_row.='<td width="20%">'.character_limiter($data->nombre,13).'</td>';
 	$table_data_row.='<td width="40%">'.character_limiter($data->descripcion,30).'</td>';
 	$table_data_row.='<td width="40%">'.character_limiter($data->direccion,30).'</td>';
-	$table_data_row.='<td width="5%">'.anchor($controller_name."/view?id=$data->id&width=".$width."&height=".$height, $CI->lang->line('comun_edit'),array('class'=>'thickbox','title'=>$CI->lang->line($controller_name.'_update'))).'  ';		
-	$table_data_row.=anchor($controller_name."/fotos/$data->id?width=".$width."&height".$height, $CI->lang->line('fotos_foto'),array('class'=>'boton_admin', 'title'=>$CI->lang->line($controller_name.'_muestra'))).'</td>';		
+	$table_data_row.='<td width="5%">'.anchor($controller_name."/view?id=$data->id&width=".$width."&height=".$height, $CI->lang->line('comun_edit'),array('class'=>'thickbox','title'=>$CI->lang->line($controller_name.'_update'))).'</td>';		
 	$table_data_row.='</tr>';
 	
 	return $table_data_row;
@@ -127,8 +126,7 @@ function get_consulta_data_row($data,$controller)
 	$table_data_row.='<td width="20%">'.character_limiter($data->enfermedad,13).'</td>';
 	$table_data_row.='<td width="40%">'.character_limiter($data->motivo,30).'</td>';
 	$table_data_row.='<td width="40%">'.character_limiter($data->fecha_actualizacion,30).'</td>';
-	$table_data_row.='<td width="5%">'.anchor($controller_name."/view?id=$data->id&width=".$width."&height=".$height, $CI->lang->line('comun_edit'),array('class'=>'thickbox','title'=>$CI->lang->line($controller_name.'_update'))).'  ';		
-	$table_data_row.=anchor($controller_name."/fotos/$data->id?width=".$width."&height".$height, $CI->lang->line('fotos_foto'),array('class'=>'boton_admin', 'title'=>$CI->lang->line($controller_name.'_muestra'))).'</td>';		
+	$table_data_row.='<td width="5%">'.anchor($controller_name."/view?id=$data->id&width=".$width."&height=".$height, $CI->lang->line('comun_edit'),array('class'=>'thickbox','title'=>$CI->lang->line($controller_name.'_update'))).'</td>';		
 	$table_data_row.='</tr>';
 	
 	return $table_data_row;
@@ -171,8 +169,7 @@ function get_defuncion_data_row($data,$controller)
 	$table_data_row.='<td width="20%">'.character_limiter($data->motivo,30).'</td>';
 	$table_data_row.='<td width="40%">'.character_limiter($data->observaciones,30).'</td>';
 	$table_data_row.='<td width="40%">'.character_limiter($data->fecha_actualizacion,30).'</td>';
-	$table_data_row.='<td width="5%">'.anchor($controller_name."/view?id=$data->id&width=".$width."&height=".$height, $CI->lang->line('comun_edit'),array('class'=>'thickbox','title'=>$CI->lang->line($controller_name.'_update'))).'  ';		
-	$table_data_row.=anchor($controller_name."/fotos/$data->id?width=".$width."&height".$height, $CI->lang->line('fotos_foto'),array('class'=>'boton_admin', 'title'=>$CI->lang->line($controller_name.'_muestra'))).'</td>';		
+	$table_data_row.='<td width="5%">'.anchor($controller_name."/view?id=$data->id&width=".$width."&height=".$height, $CI->lang->line('comun_edit'),array('class'=>'thickbox','title'=>$CI->lang->line($controller_name.'_update'))).'</td>';		
 	$table_data_row.='</tr>';
 	
 	return $table_data_row;

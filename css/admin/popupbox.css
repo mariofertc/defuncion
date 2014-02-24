@@ -6,6 +6,13 @@
 	font-style: italic;
 }
 
+#report_message
+{
+	width: 100%;
+	margin-bottom: 3px;
+	font-style: italic;
+}
+
 #customer_basic_info,#item_basic_info,#item_number_info,#supplier_basic_info,#box_basic_info,#incidencia_basic_info
 {
 	padding:5px;

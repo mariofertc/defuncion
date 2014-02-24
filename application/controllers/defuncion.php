@@ -53,7 +53,7 @@ class Defuncion extends Secure_area {
     function mis_datos($id_paciente = null) {
         $aColumns = array(
             'id' => array('checked' => true, 'es_mas' => true),
-            'enfermedad' => array('limit' => 13),
+            'observaciones' => array('limit' => 13),
             'motivo' => array('limit' => 30),
             'fecha_actualizacion' => array('limit' => 30));
         //Eventos Tabla
@@ -64,12 +64,7 @@ class Defuncion extends Secure_area {
                 'language' => "_update",
                 'width' => $this->get_form_width(),
                 'height' => $this->get_form_height(),
-                'class' => 'thickbox'),
-            '2' => array('function' => "fotos",
-                'comun_language' => "fotos_foto",
-                'language' => "_muestra",
-                'height' => 200,
-                'class' => 'boton_admin'));
+                'class' => 'thickbox'));
         $cllWhere = isset($id_paciente) ? 'and persona.persona_id = ' . $id_paciente : null;
         echo getData('defuncion_model', $aColumns, $cllAccion, $cllWhere);
     }
@@ -99,8 +94,10 @@ class Defuncion extends Secure_area {
         $accidentes_inter = $this->accidente_model->get_all_inter($id);
         $data['accidente_db'] = array();
         foreach ($accidentes_inter->result_array() as $accidente_inter) {
-            $data['accidente_db'][$accidente_inter['id']] = $accidente_inter['nombre'];
+            $data['accidente_db'][] = $accidente_inter['id'];
+//            $data['accidente_db'][$accidente_inter['id']] = $accidente_inter['nombre'];
         }
+//        var_dump($data);
 
         $data['paciente_id'] = $paciente_id;
         $this->load->view("defuncion/form", $data);
@@ -112,34 +109,42 @@ class Defuncion extends Secure_area {
      * @access public
      * @return string JSON Indicando si se guardo o no.
      */
-    function save($id = -1) {
+    function save($id = -1, $paciente_id = -1) {
         $data = array(
             'motivo' => $this->input->post('motivo'),
-            'observaciones' => $this->input->post('enfermedad'),
+            'observaciones' => $this->input->post('observaciones'),
             'aliento_etilico' => 1,
-            'valor_alcochek' => $this->input->post('presion_arterial'),
-            'factores_agravantes' => $this->input->post('frecuencia_cardiaca'),
+            'valor_alcochek' => $this->input->post('valor_alcochek'),
+            'factores_agravantes' => $this->input->post('factores_agravantes'),
             'doctor_id' => $this->input->post('doctor'),
             'fecha_actualizacion' => date('Y-m-d h:i:s')
         );
-        if ($this->input->post('paciente_id') != -1 && $this->input->post('paciente_id'))
-            $data['paciente_id'] = $this->input->post('paciente_id');
-        $data_inter=array(
-            'paciente_id'=>$this->input->post('paciente_id'),
-            'accidente_id'=>$this->input->post('accidente')
-            );
         $this->db->trans_start();
         try {
             if ($this->defuncion_model->save($data, $id)) {
                 //Nuevo lug Insert
                 if ($id == -1) {
-                    echo json_encode(array('success' => true, 'message' => 'Doctor ' .
+                    echo json_encode(array('success' => true, 'message' => 'Item ' .
                         $data['motivo'] . ' creado.', 'id' => $data['id']));
                     $id = $data['id'];
                 } else { //update incidencia
-                    echo json_encode(array('success' => true, 'message' => 'Doctor ' .
+                    echo json_encode(array('success' => true, 'message' => 'Item ' .
                         $data['motivo'] . ' actualizado.', 'id' => $id));
                 }
+                $accidentes = $this->input->post('accidente');
+//        if ($this->input->post('paciente_id') != -1 && $this->input->post('paciente_id'))
+//                if ($this->input->post('paciente_id'))
+//                    $paciente_id = $this->input->post('paciente_id');
+                $this->accidente_model->delete_inter($id);
+                if ($accidentes)
+                    foreach ($accidentes as $accidente) {
+                        $this->accidente_model->save_inter($accidente, $id);
+                    }
+                $data_inter = array(
+                    'paciente_id' => $this->input->post('paciente_id'),
+                    'accidente_id' => $this->input->post('accidente')
+                );
+
                 $this->db->trans_complete();
                 if ($this->db->trans_status() === FALSE) {
                     $this->db->trans_rollback();
